@@ -1,0 +1,27 @@
+{
+  "name": "koa-react",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbb3210/Koa-React.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbb3210/Koa-React/issues"
+  },
+  "homepage": "https://github.com/nbb3210/Koa-React#readme",
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-favicon": "^2.0.0",
+    "koa-router": "^7.2.1",
+    "koa-session2": "^2.2.5",
+    "koa-static": "^4.0.1",
+    "koa-views": "^6.1.0"
+  }
+}
