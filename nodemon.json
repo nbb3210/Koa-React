@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "./communication/",
+    "./controllers/",
+    "./models",
+    "./routers",
+    "index.js"
+  ]
+}
