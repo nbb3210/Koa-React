@@ -30,9 +30,23 @@ const del = async url => await (await fetch(url, {
   credentials: 'include',
 })).json();
 
+const put = async ({
+  body,
+  url,
+}) => await (await fetch(url, {
+  method: 'put',
+  body: JSON.stringify(body),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  mode: 'cors',
+  credentials: 'include',
+})).json();
+
 
 export {
   post,
   get,
   del,
+  put,
 };

@@ -6,6 +6,13 @@ import CardM from './CardM';
 import RecordM from './RecordM';
 import ApplicationM from './ApplicationM';
 
+import TabA from './TabA';
+import TabApplication from './TabApplication';
+import TabMember from './TabMember';
+import TabNotice from './TabNotice';
+import TabDevice from './TabDevice';
+import TabRecord from './TabRecord';
+
 export {
   Login,
   LoginWithLink,
@@ -14,4 +21,11 @@ export {
   CardM,
   RecordM,
   ApplicationM,
+
+  TabA,
+  TabApplication,
+  TabMember,
+  TabNotice,
+  TabDevice,
+  TabRecord,
 };

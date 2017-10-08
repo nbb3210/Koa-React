@@ -5,6 +5,7 @@ const {
   create,
   findOneAndRemove
 } = require('../controllers')
+const wrapIo = require('../communication/websocket')
 const member = require('koa-router')();
 
 member.get('/', async ctx => {
@@ -18,6 +19,10 @@ member.get('/', async ctx => {
     } else {
       await ctx.render('login');
     }
+  })
+  .get('/logout', async ctx => {
+    ctx.session.memberId = null;
+    ctx.redirect('/');
   })
   .post('/login', async ctx => {
     const members = await find(ctx.request.body, 'member')
@@ -51,7 +56,7 @@ member.get('/', async ctx => {
   .get('/device', async ctx => ctx.body = await find({}, 'device'))
   .get('/record', async ctx => ctx.body = await find({
     memberId: ctx.session.memberId
-  }, 'record'))
+  }, 'record', -1))
   .post('/record', async ctx => {
     const application = await create(ctx.request.body, 'application');
     const {
@@ -62,6 +67,8 @@ member.get('/', async ctx => {
       memberId,
       applicationId: application._id
     }, 'record')
+    // 提出申请，告知管理员
+    wrapIo.io.sockets.to(wrapIo.adminSocket).emit('PUSH_APPLICATION', application)
   })
   .del('/record/:applicationId', async ctx => {
     // 撤销申请
@@ -69,12 +76,19 @@ member.get('/', async ctx => {
     const record = await find({
       applicationId
     }, 'record')
-    if(record.length === 1){
-      await findOneAndRemove({_id:applicationId},'application')
-      ctx.body = await findOneAndRemove({applicationId},'record')
-    }else{
-      ctx.body ={
-        err:'申请已被处理，无法撤回！'
+    if (record.length === 1) {
+      const application = await findOneAndRemove({
+        _id: applicationId
+      }, 'application')
+      ctx.body = await findOneAndRemove({
+        applicationId
+      }, 'record')
+      // 撤回申请，告知管理员
+      wrapIo.io.sockets.to(wrapIo.adminSocket).emit('POP_APPLICATION', application)
+      wrapIo.io.sockets.to(wrapIo.adminSocket).emit('REMOVE_RECORD', record[0])
+    } else {
+      ctx.body = {
+        err: '申请已被处理，无法撤回！'
       }
     }
   })

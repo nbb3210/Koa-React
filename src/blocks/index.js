@@ -20,6 +20,13 @@ import ApplicationText from './ApplicationText';
 import ApplicationContent from './ApplicationContent';
 import Recall from './Recall';
 
+import ApplicationA from './ApplicationA';
+import ApplicationB from './ApplicationB';
+import ApplicationC from './ApplicationC';
+import ApplicationCard from './ApplicationCard';
+
+import MemberCard from './MemberCard';
+
 export {
   StudentId,
   Password,
@@ -42,4 +49,11 @@ export {
 
   ApplicationContent,
   Recall,
+
+  ApplicationA,
+  ApplicationB,
+  ApplicationC,
+  ApplicationCard,
+
+  MemberCard,
 };

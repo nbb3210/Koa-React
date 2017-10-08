@@ -5,8 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Koa-React</title>
+  <style>
+    html,
+    body,
+    #app {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .tabAdmin>div:last-child {
+      height: 100%;
+    }
+    .tabAdmin>div:last-child [aria-hidden='false']{
+      height: 100%;
+    }
+
+    .tabApplication>div:last-child {
+      height: calc(100% - 40px);
+    }
+    .tabApplication>div:last-child [aria-hidden='false']{
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
-  Admin
+  <div id="app"></div>
+  <script src="/build/admin.js"></script>
 </body>
 </html>

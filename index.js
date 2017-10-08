@@ -7,6 +7,7 @@ const bodyParser = require('koa-bodyparser');
 const session = require('koa-session2');
 const favicon = require('koa-favicon');
 const mongoose = require('mongoose');
+const warpIo = require('./communication/websocket')
 const {
   member,
   admin,
@@ -22,4 +23,5 @@ app.use(favicon(path.resolve(__dirname, './static/favicon.ico')));
 app.use(bodyParser());
 app.use(member.routes());
 app.use(admin.routes());
-app.listen(8080, () => console.log('The server is starting at port 8080'));
+const server = app.listen(process.env.PORT, () => console.log(`Listening at http://localhost:${process.env.PORT}`))
+warpIo.init(server)

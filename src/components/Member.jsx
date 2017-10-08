@@ -9,6 +9,15 @@ class Member extends Component {
     this.props.getMember();
     this.props.getDevices();
     this.props.getRecords();
+
+    // 设备变化
+    window.socket.on('UPDATE_DEVICES', (devices) => {
+      this.props.updateDevices(devices);
+    });
+    // 接受处理结果
+    window.socket.on('ADD_RECORD', (record) => {
+      this.props.addRecord(record);
+    });
   }
 
   handleApplication = async (member, devices, days, reason) => {
@@ -50,6 +59,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(action.getMember()),
   getDevices: () =>
     dispatch(action.getDevices()),
+  updateDevices: devices =>
+    dispatch(action.updateDevices(devices)),
   getRecords: () =>
     dispatch(action.getReocrds()),
   addRecord: r =>

@@ -1,9 +1,9 @@
 const Models = require('../models')
 
 module.exports = {
-  find: async(params, model) => await Models[model].find(params, null, {
+  find: async(params, model, sort = 1) => await Models[model].find(params, null, {
     sort: {
-      timestamp: -1
+      createdAt: sort
     }
   }),
   findById: async(id, model) => await Models[model].findById(id),

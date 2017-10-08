@@ -1,7 +1,10 @@
+require('dotenv').config()
+const webpack = require('webpack')
 const path = require('path')
 module.exports = {
   entry: {
     member: path.resolve(__dirname, './src/entry/member.jsx'),
+    admin: path.resolve(__dirname, './src/entry/admin.jsx'),
   },
   output: {
     path: path.join(__dirname, './static/build'),
@@ -42,4 +45,9 @@ module.exports = {
       },
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'HOST': "'" + process.env.HOSTNAME + ':' + process.env.PORT + "'"
+    }),
+  ]
 }

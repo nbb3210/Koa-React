@@ -1,9 +1,11 @@
 import constants from '../constants';
-import { post, get, del } from '../utils';
+import { get } from '../utils';
 
 export default {
   getMember: () => async (dispatch) => {
     const member = await get('/member');
+    // 传递socket
+    window.socket.emit('memberOnline', member._id);
     dispatch({
       type: constants.GET_MEMBER,
       member,
@@ -13,6 +15,12 @@ export default {
     const devices = await get('/device');
     dispatch({
       type: constants.GET_DEVICES,
+      devices,
+    });
+  },
+  updateDevices: devices => (dispatch) => {
+    dispatch({
+      type: constants.UPDATE_DEVICES,
       devices,
     });
   },

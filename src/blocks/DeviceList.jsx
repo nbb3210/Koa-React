@@ -8,12 +8,20 @@ const DeviceList = (props) => {
       const tags = devices.filter(d => d.type === t)
         .map((tag) => {
           if (tag.status === 1) {
+            // 设备外借中
             return (
               <Tag color="red" key={tag._id}>{tag.name}</Tag>
             );
           } else if (tag.status === 2) {
+            // 设备维修中
             return (
-              <Tag color="cyan" key={tag._id}>{tag.name}</Tag>
+              <Tag key={tag._id}>{tag.name}</Tag>
+            );
+          }
+          // 设备可借
+          if (props.admin) {
+            return (
+              <Tag color="green" key={tag._id}>{tag.name}</Tag>
             );
           }
           return (
